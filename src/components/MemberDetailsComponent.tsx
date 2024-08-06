@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 export default function MemberDetailsComponent() {
     return(
         <div className="bg-white py-6 sm:py-8 lg:py-12">
@@ -7,9 +9,9 @@ export default function MemberDetailsComponent() {
 
                 <div>
                     <div className="pb-10">
-                        <button type="button" className="text-white end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">Back</button>
+                        <Link to={'/member'} type="button" className="text-white end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">Back</Link>
                 </div>
-                <img loading="lazy" alt="Member avatar"
+                <img src={'https://images.unsplash.com/photo-1557862921-37829c790f19?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfHx8MA%3D%3D'} loading="lazy" alt="Member avatar"
                 className="max-h-15 max-w-15 object-cover object-center rounded-full shadow-lg"/>
             </div>
 
@@ -20,10 +22,10 @@ export default function MemberDetailsComponent() {
                     className="mb-1 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-1 md:text-left">Varga Gyula</h1>
 
                 <h2 className="mb-2 text-center text-xl font-semibold text-gray-500 sm:text-2xl md:mb-4 md:text-left">
-                    <a
+                    <Link to={''}
                        className="transition duration-100 hover:text-indigo-500 active:text-indigo-600">
                        Gyulus
-                    </a>
+                    </Link>
                 </h2>
 
                 <div className="flex place-items-left pt-10">
@@ -60,8 +62,8 @@ export default function MemberDetailsComponent() {
                 <span className="text-sm text-gray-400">2020</span>
 
                 <h2 className="text-xl font-bold text-gray-800">
-                    <a
-                    className="transition duration-100 hover:text-indigo-500 active:text-indigo-600">repo name</a>
+                    <Link to={''}
+                    className="transition duration-100 hover:text-indigo-500 active:text-indigo-600">repo name</Link>
             </h2>
 
             <p className="text-gray-500">description</p>

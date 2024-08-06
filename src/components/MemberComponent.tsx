@@ -8,7 +8,7 @@ export default function MemberComponent(){
 
             <div className="flex flex-col overflow-hidden rounded-lg border bg-white">
                 <Link to={'/member-details'} className="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
-                    <img loading="lazy" alt="Member avatar"
+                    <img src={'https://images.unsplash.com/photo-1557862921-37829c790f19?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfHx8MA%3D%3D'} loading="lazy" alt="Member avatar"
                          className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"/>
                 </Link>
 
