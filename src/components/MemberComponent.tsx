@@ -20,7 +20,7 @@ export default function MemberComponent(){
                     <div className="mt-auto flex items-end justify-between">
                         <div className="flex items-center gap-2">
                             <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
-                                <img loading="lazy" alt="Member avatar"
+                                <img src={'https://images.unsplash.com/photo-1557862921-37829c790f19?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfHx8MA%3D%3D'} loading="lazy" alt="Member avatar"
                                      className="h-full w-full object-cover object-center"/>
                             </div>
 
