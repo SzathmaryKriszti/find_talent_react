@@ -71,12 +71,12 @@ export default function SearchComponent() {
 
             </div>
 
+            <div  className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-6 xl:gap-8 py-6 sm:py-8 lg:py-10">
+
             {
                 members.map((member, index) => (
-                    <div key={index}
-                        className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 py-6 sm:py-8 lg:py-10">
 
-                        <div className="flex flex-col overflow-hidden rounded-lg border bg-white">
+                        <div key={index} className="flex flex-col overflow-hidden rounded-lg border bg-white">
                             <Link to={'/member-details'} className="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
                                 <img src={member.avatarUrl} loading="lazy" alt="Member avatar"
                                      className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"/>
@@ -105,9 +105,11 @@ export default function SearchComponent() {
                         </div>
 
 
-                    </div>
+
                 ))
             }
+
+            </div>
 
         </div>
 
