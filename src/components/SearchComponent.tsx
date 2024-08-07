@@ -1,7 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
 
-export default function SearchComponent () {
-    return(
+
+type Member = {
+    id: number;
+    username: string;
+    name: string;
+    createdAt: string;
+    avatarUrl: string;
+}
+
+export default function SearchComponent() {
+    const [language, setLanguage] = useState('');
+
+
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>){
+         event.preventDefault();
+         axios.get<Member[]>(`http://localhost:8080/api/searches/member?language=${encodeURIComponent(language)}`)
+             .then(function (response) {
+                 console.log(response)
+             });
+     }
+
+
+
+
+    return (
         <div className="bg-white py-6 sm:py-8 lg:py-12">
             <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
 
@@ -15,7 +39,7 @@ export default function SearchComponent () {
                 </div>
 
 
-                <form className="max-w-md mx-auto py-6 sm:py-8 lg:py-10">
+                <form onSubmit={handleSubmit} className="max-w-md mx-auto py-6 sm:py-8 lg:py-10">
                     <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -25,24 +49,19 @@ export default function SearchComponent () {
                                       strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="text" id="default-search"
-                               className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-green-500 dark:focus:border-green-500"
-                               placeholder="Java, Scala, Kotlin..." required/>
+                        <input
+                            type="text"
+                            autoComplete={''}
+                            id="default-search"
+                            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-green-500 dark:focus:border-green-500"
+                            placeholder="Java, Scala, Kotlin..." required
+                            onChange={(event) => setLanguage(event.target.value)}
+                        />
                         <button type="submit"
                                 className="text-white absolute end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">Search
                         </button>
                     </div>
                 </form>
-
-                <div className="bg-white py-6 sm:py-8 lg:py-12">
-                    <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-
-                        <p className="mb-2 text-center font-semi-bold text-green-500 md:mb-3 lg:text-lg">There is no
-                            member with this language.</p>
-
-                    </div>
-                </div>
-
 
 
             </div>

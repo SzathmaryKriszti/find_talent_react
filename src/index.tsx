@@ -1,28 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
-    createBrowserRouter,
+    createBrowserRouter, createRoutesFromElements, Route,
     RouterProvider,
 } from "react-router-dom";
 import './index.css';
 import SearchComponent from "./components/SearchComponent";
 import MemberComponent from "./components/MemberComponent";
 import MemberDetailsComponent from "./components/MemberDetailsComponent";
+import App from "./App";
 
-const router = createBrowserRouter([
-    {
-        path: "",
-        element: <div><SearchComponent /></div>,
-    },
-    {
-        path: "member",
-        element: <div><MemberComponent /></div>,
-    },
-    {
-        path: "member-details",
-        element: <div><MemberDetailsComponent /></div>,
-    },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+      <Route path={'/'} element={<App />}>
+          <Route path={'/'} element={<SearchComponent />}/>
+          <Route path={'member'} element={<MemberComponent />}/>
+          <Route path={'member-details:id'} element={<MemberDetailsComponent />}/>
+      </Route>
+  )
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
