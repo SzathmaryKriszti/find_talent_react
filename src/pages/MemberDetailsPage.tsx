@@ -1,11 +1,8 @@
-import {useNavigate} from "react-router-dom";
+import MemberDetailsComponent from "../components/MemberDetailsComponent";
 
 export default function MemberDetailsPage() {
-    const navigate = useNavigate();
-    return <div>
-        <button onClick={() => {
-            navigate('/')
-        }}>Navigate to Search</button>
-        Member Details Page
-    </div>
+
+    return (
+        <MemberDetailsComponent />
+    );
 }
