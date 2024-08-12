@@ -1,4 +1,4 @@
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useSearchParams} from "react-router-dom";
 import axios from "axios";
 import {useEffect, useState} from "react";
 
@@ -27,6 +27,8 @@ interface Repos {
 export default function MemberDetailsComponent() {
     const {id} = useParams();
     const [member, setMember] = useState<MemberDetails>();
+    const [searchParams] = useSearchParams();
+    const language = searchParams.get('language');
 
     function loadMemberDetails(id: string | undefined) {
         axios.get<MemberDetails>(`http://localhost:8080/api/searches/member-details/${id}`)
@@ -51,8 +53,10 @@ export default function MemberDetailsComponent() {
 
                     <div>
                         <div className="pb-10">
-                            <Link to={'/'} type="button"
-                                  className="text-white end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">Back</Link>
+                            <Link to={`/?language=${language}`} type="button"
+                                  className="text-white end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">
+                                Back
+                            </Link>
                         </div>
                         <img
                             src={member?.avatarUrl}

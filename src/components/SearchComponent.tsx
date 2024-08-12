@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {Link, useSearchParams} from "react-router-dom";
 
 
 export interface Member {
@@ -10,16 +11,30 @@ export interface Member {
     avatarUrl: string;
 }
 
-export default function SearchComponent({ setMembers }: { setMembers: (memberList: Member[]) => void }) {
-    const [language, setLanguage] = useState('');
+export default function SearchComponent({setMembers}: { setMembers: (memberList: Member[]) => void }) {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const languageParam = searchParams.get('language');
+    const [language, setLanguage] = useState<string>(languageParam || '');
+
+    useEffect(() => {
+        if (language !== null) {
+            axios.get<Member[]>(`http://localhost:8080/api/searches/member?language=${encodeURIComponent(language)}`)
+                .then((response) => {
+                    const memberList = response.data
+                    setMembers(memberList);
+                });
+        }
+    }, [])
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         axios.get<Member[]>(`http://localhost:8080/api/searches/member?language=${encodeURIComponent(language)}`)
-            .then((response) => {
-                const memberList = response.data
-                setMembers(memberList);
-            });
+                .then((response) => {
+                    const memberList = response.data
+                    setMembers(memberList);
+                    setSearchParams({language: language})
+                });
+
     }
 
     return (
@@ -48,6 +63,7 @@ export default function SearchComponent({ setMembers }: { setMembers: (memberLis
                         </div>
                         <input
                             type="text"
+                            value={language}
                             autoComplete={''}
                             id="default-search"
                             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-green-500 dark:focus:border-green-500"
@@ -55,7 +71,12 @@ export default function SearchComponent({ setMembers }: { setMembers: (memberLis
                             onChange={(event) => setLanguage(event.target.value)}
                         />
                         <button type="submit"
-                                className="text-white absolute end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">Search
+                                className="text-white absolute end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">
+                            <Link to={{
+                                pathname: '/',
+                                search: '?languageParam=languageParam',
+                            }}/>
+                            Search
                         </button>
                     </div>
                 </form>

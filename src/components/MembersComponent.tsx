@@ -1,10 +1,10 @@
-import React from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import {Member} from "./SearchComponent";
 
 
 export default function MembersComponent({members}: { members: Member[] }) {
-    const navigate = useNavigate();
+    const [searchParams ] = useSearchParams();
+    const language = searchParams.get('language');
 
 
     return (
@@ -15,7 +15,7 @@ export default function MembersComponent({members}: { members: Member[] }) {
 
                     <div key={index} className="flex flex-col overflow-hidden rounded-lg border bg-white">
 
-                        <Link to={`/member-details/${member.id}`}
+                        <Link to={`/member-details/${member.id}/?language=${language}`}
                               className="flex flex-col overflow-hidden rounded-lg border bg-white">
                             <div
                                 className="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
